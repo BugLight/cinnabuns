@@ -20,7 +20,7 @@
     "backend": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/canteens",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
