@@ -6,21 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [Route("api/canteens/{canteenId}/categories")]
+    [Route("api")]
     public class CategoryController : Controller
     {
         // GET: api/canteens/5/categories
-        [HttpGet]
-        public IEnumerable<string> Get(int categoryId)
+        [HttpGet("canteens/{canteenId}/categories")]
+        public IEnumerable<string> GetCanteenCategories(int canteenId)
         {
-            return new string[] { categoryId.ToString() };
+            return new string[] { canteenId.ToString() };
         }
 
-        // GET api/canteens/5/categories/3
-        [HttpGet("{id}")]
-        public string Get(int categoryId, int id)
+        // GET api/categories/3
+        [HttpGet("categories/{id}")]
+        public string GetCategory(int id)
         {
-            return categoryId.ToString() + " " + id.ToString();
+            return id.ToString();
         }
     }
 }
