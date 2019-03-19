@@ -25,6 +25,9 @@ const store = new Vuex.Store({
   mutations: {
     setCanteens (state, canteens) {
       state.canteens = canteens
+    },
+    setActiveCanteen (state, canteen) {
+      state.activeCanteen = canteen
     }
   }
 })

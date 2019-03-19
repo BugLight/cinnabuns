@@ -14,8 +14,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 .app {
   margin: 0;
   padding: 0;
+  font-family: 'Roboto', sans-serif; 
 }
 </style>

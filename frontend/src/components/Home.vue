@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="canteen-container">
-      <div class="canteen" v-for="canteen in canteens" :key="canteen.id" @click="linkToCanteen(canteen.id)">
+      <div class="canteen" v-for="canteen in canteens" :key="canteen.id" @click="linkToCanteen(canteen)">
         <div class="c-name">{{canteen.name}}</div>
         <div class="c-description">{{canteen.description}}</div>
         <div class="c-card" title="Оплата картой" v-if="canteen.acceptCards"><font-awesome-icon icon="credit-card" size="lg" :style="{ color: 'black' }"/> Оплата картой</div>
@@ -13,19 +13,24 @@
 <script>
 export default {
   created() {
-    this.$http.get('http://172.17.0.2/api/canteens').then(response => {
+    this.$http.get(this.backUrl+'/api/canteens').then(response => {
       this.$store.commit('setCanteens', response.body);
       this.canteens = this.$store.state.canteens;
     })
   },
   data() {
+    /*
+      global BACK_URL
+    */
     return {
-      canteens: null
+      canteens: null,
+      backUrl: BACK_URL
     }
   },
   methods: {
-    linkToCanteen: function (id) {
-      this.$router.push({name: 'canteen', params: {id: id}})
+    linkToCanteen: function (canteen) {
+      this.$store.commit('setActiveCanteen', canteen)
+      this.$router.push({name: 'canteen', params: {id: canteen.id}})
     }
   },
 }
@@ -59,6 +64,8 @@ export default {
     }
     .c-description {
       font-size: 23px;
+      width: 500px;
+      word-wrap: break-word;
       @media (max-width: 900px) {
         font-size: 33px;
       }
