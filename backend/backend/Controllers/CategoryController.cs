@@ -4,16 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+using backend.Models;
+
 namespace backend.Controllers
 {
     [Route("api")]
     public class CategoryController : Controller
     {
+        private readonly AppContext context;
+
         // GET: api/canteens/5/categories
         [HttpGet("canteens/{canteenId}/categories")]
-        public IEnumerable<string> GetCanteenCategories(int canteenId)
+        public IEnumerable<MealCategory> GetCanteenCategories(int canteenId)
         {
-            return new string[] { canteenId.ToString() };
+            return (from m in context.MealCategories
+                    where (m.CanteenId == canteenId)
+                    select m);
         }
 
         // GET api/categories/3
