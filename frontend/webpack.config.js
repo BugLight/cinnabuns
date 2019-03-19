@@ -1,6 +1,7 @@
 const path               = require('path');
 const HtmlWebpackPlugin  = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin  = require('copy-webpack-plugin');
 const VueLoaderPlugin    = require('vue-loader/lib/plugin');
 
 module.exports = {
@@ -32,7 +33,7 @@ module.exports = {
           'sass-loader'
         ]
       }
-    ]
+    ],
   },
   optimization: {
     splitChunks: {
@@ -42,8 +43,14 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: 'static',
+        cache: true,
+      },
+    ]),
     new HtmlWebpackPlugin({
-      title: 'Ашот камшот',
+      title: 'Столовая Ашота',
       inject: false,
       filename: 'index.html',
       template: require('html-webpack-template'),
@@ -51,7 +58,7 @@ module.exports = {
       meta: [
         {
           name: 'viewport',
-          content: 'width=device-width, initial-scale=1'
+          content: 'width=device-width, width=900'
         }
       ],
       headHtmlSnippet: '<style>body, html {margin: 0;padding: 0}</style>',
@@ -68,6 +75,6 @@ module.exports = {
   watchOptions: {
     aggregateTimeout: 300,
     poll: 1000,
-    ignored: ['node_modules']
+    ignored: ['node_modules'],
   }
 }
