@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace backend
 {
@@ -18,7 +19,7 @@ namespace backend
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = new VcapConfigDecorator(configuration);
         }
 
         public IConfiguration Configuration { get; }
@@ -36,6 +37,9 @@ namespace backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var context = app.ApplicationServices.GetService<AppContext>();
+            context.Database.Migrate();
+
             app.UseCors(options => options.AllowAnyOrigin());
             if (env.IsDevelopment())
             {
