@@ -24,9 +24,13 @@ namespace backend.Controllers
 
         // GET api/categories/3
         [HttpGet("categories/{id}")]
-        public string GetCategory(int id)
+        public ActionResult<MealCategory> GetCategory(int id)
         {
-            return id.ToString();
+            var mealCategory = context.MealCategories.Find(id);
+            if (mealCategory == null)
+                return NotFound();
+
+            return mealCategory;
         }
     }
 }

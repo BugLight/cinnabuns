@@ -30,9 +30,13 @@ namespace backend.Controllers
 
         // GET api/meals/3
         [HttpGet("meals/{id}")]
-        public string GetMeal(int id)
+        public ActionResult<Meal> GetMeal(int id)
         {
-            return id.ToString();
+            var meal = context.Meals.Find(id);
+            if (meal == null)
+                return NotFound();
+
+            return meal;
         }
     }
 }
