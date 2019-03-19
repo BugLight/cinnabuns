@@ -9,18 +9,43 @@ namespace backend.Controllers
     [Route("api/canteens")]
     public class CanteenController : Controller
     {
+        private readonly object[] canteens = new object[]
+        {
+            new
+            {
+                Id = 0,
+                Name = "Столовая №1",
+                Description = "Отличная столовая",
+                AcceptCards = true
+            },
+            new
+            {
+                Id = 1,
+                Name = "Столовая №2",
+                Description = "Тоже отличная столовая",
+                AcceptCards = false
+            }
+        };
+
         // GET: api/canteens
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<object> Get()
         {
-            return new string[] { "value1", "value2" };
+            return canteens;
         }
 
         // GET api/canteens/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<object> Get(int id)
         {
-            return "value";
+            switch (id)
+            {
+            case 0:
+            case 1:
+                return canteens[id];
+            default:
+                return NotFound();
+            }
         }
     }
 }
