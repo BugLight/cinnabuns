@@ -1,0 +1,4 @@
+ applications:
+ - name: cinnabuns
+   random-route: true
+   memory: 512M
