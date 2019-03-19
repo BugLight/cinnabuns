@@ -5,10 +5,10 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY ["backend/backend.csproj", "backend/"]
+COPY ["backend.csproj", "backend/"]
 RUN dotnet restore "backend/backend.csproj"
-COPY . .
 WORKDIR "/src/backend"
+COPY . .
 RUN dotnet build "backend.csproj" -c Release -o /app
 
 FROM build AS publish
