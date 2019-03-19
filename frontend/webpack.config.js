@@ -58,7 +58,7 @@ module.exports = {
       meta: [
         {
           name: 'viewport',
-          content: 'width=device-width, initial-scale=1'
+          content: 'width=device-width, width=900'
         }
       ],
       headHtmlSnippet: '<style>body, html {margin: 0;padding: 0}</style>',
