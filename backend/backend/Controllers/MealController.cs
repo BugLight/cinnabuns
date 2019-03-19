@@ -11,7 +11,7 @@ namespace backend.Controllers
     [Route("api")]
     public class MealController : Controller
     {
-        public readonly AppContext context;
+        private readonly AppContext context;
 
         // GET: api/canteens/5/meals
         [HttpGet("canteens/{canteenId}/meals")]
