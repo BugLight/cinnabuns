@@ -1,11 +1,7 @@
-﻿using JetBrains.Annotations;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿using System;
 using backend.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace backend
 {
@@ -17,6 +13,14 @@ namespace backend
 
         public AppContext(DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Canteen>()
+                .Property(c => c.AcceptCards)
+                .HasConversion(new BoolToZeroOneConverter<Int16>());
         }
     }
 }

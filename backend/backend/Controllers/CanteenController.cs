@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -9,43 +8,28 @@ namespace backend.Controllers
     [Route("api/canteens")]
     public class CanteenController : Controller
     {
-        private readonly object[] canteens = new object[]
+        private readonly AppContext context;
+
+        public CanteenController(AppContext context)
         {
-            new
-            {
-                Id = 0,
-                Name = "Столовая №1",
-                Description = "Отличная столовая",
-                AcceptCards = true
-            },
-            new
-            {
-                Id = 1,
-                Name = "Столовая №2",
-                Description = "Тоже отличная столовая",
-                AcceptCards = false
-            }
-        };
+            this.context = context;
+        }
 
         // GET: api/canteens
         [HttpGet]
-        public IEnumerable<object> Get()
+        public IEnumerable<Canteen> GetCanteens()
         {
-            return canteens;
+            return from c in context.Canteens select c;
         }
 
         // GET api/canteens/5
         [HttpGet("{id}")]
         public ActionResult<object> Get(int id)
         {
-            switch (id)
-            {
-            case 0:
-            case 1:
-                return canteens[id];
-            default:
+            var canteen = context.Canteens.Find(id);
+            if (canteen == null)
                 return NotFound();
-            }
+            return canteen;
         }
     }
 }
