@@ -40,7 +40,7 @@
                 Калорийность: {{meal.calorie}} ккал.<br/>
                 Цена: {{meal.price}} р.
               </div>
-              <div class="add-to-basket" :id="`btn-add-basket-${meal.id}`" @click="addToBascket(meal, `#btn-add-basket-${meal.id}`)">Добавить в корзину</div>
+              <div class="add-to-basket" :id="`btn-add-basket-${meal.id}`" @click="addToBascket(meal, `#btn-add-basket-${meal.id}`)"><span v-if="meal.type == 'isBasket'">Убрать из корзины</span><span v-else>Добавить в корзину</span></div>
             </li>
           </ul>
         </div>

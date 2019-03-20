@@ -60,6 +60,7 @@ export default {
     border: 1px solid black;
     border-top-left-radius: 20px;
     padding: 10px 20px;
+    cursor: pointer;
   }
   .basket-show-panel {
     width: 100%;
