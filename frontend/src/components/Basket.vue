@@ -55,12 +55,21 @@ export default {
   bottom: 0;
   right: 30px;
   width: 300px;
+  background-color: #fff;
+  @media (max-width: 900px) {
+    right: 0px;
+    width: 100%;
+  }
   .basket-false {
     width: 100%;
     border: 1px solid black;
     border-top-left-radius: 20px;
     padding: 10px 20px;
     cursor: pointer;
+    @media (max-width: 900px) {
+      border-top-right-radius: 20px;
+      width: calc(100% - 40px);
+    }
   }
   .basket-show-panel {
     width: 100%;
