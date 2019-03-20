@@ -20,7 +20,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     activeCanteen: null,
-    canteens: null
+    canteens: null,
+    accessToken: localStorage.getItem('accessToken') || ''
   },
   mutations: {
     setCanteens (state, canteens) {
@@ -28,6 +29,41 @@ const store = new Vuex.Store({
     },
     setActiveCanteen (state, canteen) {
       state.activeCanteen = canteen
+    },
+    setAccessToken (state, token) {
+      state.accessToken = token;
+      localStorage.setItem('accessToken', token);
+    },
+    clearAccessToken (state) {
+      state.accessToken = '';
+      localStorage.removeItem('accessToken');
+    }
+  },
+  getters: {
+    isAuthenticated (state) {
+      return !!state.accessToken;
+    },
+    accessToken (state) {
+      return state.accessToken;
+    }
+  },
+  actions: {
+    auth (context, login) {
+      return new Promise((res, rej) => {
+        Vue.http.post(BACK_URL + '/api/auth', login).then(response => {
+          if (response.status != 200) {
+            context.commit('clearAccessToken');
+            rej();
+          } else {
+            let token = response.body;
+            context.commit('setAccessToken', token)
+            res(token);
+          }
+        }).catch(e => {
+          context.commit('clearAccessToken');
+          rej(e);
+        });
+      });
     }
   }
 })

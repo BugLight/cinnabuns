@@ -7,6 +7,8 @@
         <div class="c-card" title="Оплата картой" v-if="canteen.acceptCards"><font-awesome-icon icon="credit-card" size="lg" :style="{ color: 'black' }"/> Оплата картой</div>
       </div>
     </div>
+    <!-- Remove it -->
+    <router-link to="/admin">Admin</router-link>
   </div>
 </template>
 
