@@ -1,4 +1,8 @@
+import Basket from '../Basket.vue';
 export default {
+  components: {
+    Basket
+  },
   created() {
     this.setCanteen();
   },
@@ -22,6 +26,7 @@ export default {
     getCategories: function() {
       this.$http.get(this.backUrl+'/api/canteens/'+this.canteen.id+'/categories').then(response => {
         this.categories = response.body
+        this.getContent();
       })
     },
     setSlider: function(lCount, rCount, bSlider, minSize, maxSize) {
@@ -58,13 +63,16 @@ export default {
       } else if (active == "calories") {
         this.filters.kkal = min == minSize && max == maxSize ? null : [min, max]
       }
-      // this.updateContent()
+      this.updateContent()
+    },
+    getContent: function() {
+      this.updateContent()
     },
     updateContent: function() {
       let categories = this.filters.categories,
           price = this.filters.price,
           calories = this.filters.kkal;
-      this.$http.get(this.backUrl+`/api/canteens/${this.canteen.id}/meals/${
+      this.$http.get(this.backUrl+`/api/canteens/${this.canteen.id}/meals?${
         categories.length > 0 ? `categories=${categories.join(',')}` : ''
       }${
         categories.length > 0 && price ? '&' : ''
@@ -74,7 +82,37 @@ export default {
         calories && price ? '&' : categories.length > 0 && calories ? '&' : ''
       }${
         calories ? `caloriesMin=${calories[0]}&caloriesMax=${calories[1]}` : ''
-      }`)
+      }`).then(response => {
+        this.meals = response.body
+        this.createMenu()
+      })
+    },
+    createMenu: function() {
+      this.menu = []
+      for (let category of this.categories){
+        let _meals = []
+        for (let meal of this.meals) {
+          if (meal.mealCategoryId == category.id) {
+            _meals.push(meal)
+          }
+        }
+        if (_meals.length > 0) {
+          this.menu.push({
+            category: category,
+            meals: _meals
+          })
+        }
+      }
+    },
+    addToBascket: function(meal, el) {
+      if (this.basketMeals.indexOf(meal) !== -1) {
+        $(el).html('Добавить в корзину')
+        this.basketMeals.splice(this.basketMeals.indexOf(meal), 1)
+      } else {
+        $(el).html('Убрать из корзины')
+        this.basketMeals.push(meal)
+
+      }
     }
   },
   data() {
@@ -82,9 +120,12 @@ export default {
       global BACK_URL
     */
     return {
+      basketMeals: [],
       categories: null,
       canteen: null,
+      meals: null,
       backUrl: BACK_URL,
+      menu: [],
       filters: {
         categories: [],
         price: null,
