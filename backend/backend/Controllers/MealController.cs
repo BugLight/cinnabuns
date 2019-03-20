@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -22,9 +23,8 @@ namespace backend.Controllers
                                                  [FromQuery] int? calorieMin, [FromQuery] int? calorieMax)
         {
 
-            return (from m in context.Meals
-                    join c in context.MealCategories on m.MealCategoryId equals c.Id
-                    where c.CanteenId == canteenId &&
+            return (from m in context.Meals.Include(m => m.MealCategory)
+                    where m.MealCategory.CanteenId == canteenId &&
                           (string.IsNullOrEmpty(categories) || categories.Contains(m.MealCategoryId.ToString())) &&
                           (priceMin == null || priceMin <= m.Price) &&
                           (priceMax == null || priceMax >= m.Calorie) &&
@@ -37,7 +37,7 @@ namespace backend.Controllers
         [HttpGet("meals/{id}")]
         public ActionResult<Meal> GetMeal(int id)
         {
-            var meal = context.Meals.Find(id);
+            var meal = context.Meals.Include(m => m.MealCategory).FirstOrDefault(m => m.Id == id);
             if (meal == null)
                 return NotFound();
 
