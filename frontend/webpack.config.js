@@ -54,7 +54,7 @@ module.exports = {
       },
     ]),
     new HtmlWebpackPlugin({
-      title: 'Столовая Ашота',
+      title: 'Cinnabuns',
       inject: false,
       filename: 'index.html',
       template: require('html-webpack-template'),
