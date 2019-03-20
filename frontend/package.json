@@ -7,7 +7,7 @@
     "watch": "npx webpack --watch",
     "build": "npx webpack --config webpack.config.js",
     "prod": "npx webpack --mode=production --config webpack.config.js",
-    "serve": "npx serve dist"
+    "serve": "npx serve -s dist"
   },
   "keywords": [],
   "author": "",

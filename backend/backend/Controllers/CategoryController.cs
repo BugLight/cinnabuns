@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using backend.Models;
@@ -13,13 +11,18 @@ namespace backend.Controllers
     {
         private readonly AppContext context;
 
+        public CategoryController(AppContext context)
+        {
+            this.context = context;
+        }
+
         // GET: api/canteens/5/categories
         // Function for getting canteen's category of meals by canteen id
         [HttpGet("canteens/{canteenId}/categories")]
         public IEnumerable<MealCategory> GetCanteenCategories(int canteenId)
         {
             return (from m in context.MealCategories
-                    where (m.CanteenId == canteenId)
+                    where m.CanteenId == canteenId
                     select m);
         }
 

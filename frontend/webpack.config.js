@@ -1,4 +1,5 @@
 const path               = require('path');
+const DefinePlugin       = require('webpack').DefinePlugin;
 const HtmlWebpackPlugin  = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin  = require('copy-webpack-plugin');
@@ -41,6 +42,9 @@ module.exports = {
     }
   },
   plugins: [
+    new DefinePlugin({
+      BACK_URL: JSON.stringify(process.env.BACK_URL)
+    }),
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
@@ -55,13 +59,14 @@ module.exports = {
       filename: 'index.html',
       template: require('html-webpack-template'),
       appMountIds: ['app'],
+      baseHref: "/",
       meta: [
         {
           name: 'viewport',
           content: 'width=device-width, width=900'
         }
       ],
-      headHtmlSnippet: '<style>body, html {margin: 0;padding: 0}</style>',
+      headHtmlSnippet: '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet"><script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script><style>body, html {margin: 0;padding: 0}</style>',
       minify: {
         collapseWhitespace: true,
         removeComments: true,

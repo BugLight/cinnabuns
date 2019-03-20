@@ -1,12 +1,10 @@
 ﻿namespace backend.Models
 {
-    public class MealCategory
+    public class User
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
 
-        public int CanteenId { get; set; }
-        public Canteen Canteen { get; set; }
+        public Credentials Credentials { get; set; }
     }
 }
