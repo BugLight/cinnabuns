@@ -5,8 +5,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCreditCard, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+/**
+ * Using icons components
+ */
 library.add(faCreditCard, faShoppingBasket)
-
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
@@ -16,6 +18,10 @@ import router from './router';
 
 Vue.use(Resource);
 Vue.use(Vuex);
+
+/**
+ * Vuex - global state storage
+ */
 
 const store = new Vuex.Store({
   state: {
