@@ -17,7 +17,7 @@ namespace backend.Controllers
         }
 
         // GET: api/canteens/5/categories
-        // Function for getting canteen's category of meals by canteen id
+        // Function for getting canteen's categories of meals by canteen id
         [HttpGet("canteens/{canteenId}/categories")]
         public IEnumerable<MealCategory> GetCanteenCategories(int canteenId)
         {
