@@ -28,9 +28,25 @@
           <div id="calory-range"></div>
         </div>
       </div>
-      <div class="meals-container"></div>
-      <div class="info"></div>
+      <div class="meals-container">
+        <h3 style="line-height: 0; font-size: 25px;">Меню</h3>
+        <div class="catedory-meals" v-for="content in menu" :key="content.id">
+          <span class="title-category">{{content.category.name}}</span>
+          <ul>
+            <li v-for="meal in content.meals" :key="meal.id">
+              <div class="meal-title">{{meal.name}}</div>
+              <div class="meal-info">
+                Вес: {{meal.weight}} г.<br/>
+                Калорийность: {{meal.calorie}} ккал.<br/>
+                Цена: {{meal.price}} р.
+              </div>
+              <div class="add-to-basket" :id="`btn-add-basket-${meal.id}`" @click="addToBascket(meal, `#btn-add-basket-${meal.id}`)">Добавить в корзину</div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <Basket :meals="basketMeals"></Basket>
   </div>
 </template>
 <script src="./scripts/canteen.js"></script>

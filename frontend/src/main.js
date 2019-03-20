@@ -2,10 +2,10 @@ import Vue from 'vue';
 import Resource from 'vue-resource';
 import Vuex from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import { faCreditCard, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCreditCard)
+library.add(faCreditCard, faShoppingBasket)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
