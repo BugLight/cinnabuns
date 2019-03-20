@@ -22,6 +22,7 @@
       "launchBrowser": true,
       "launchUrl": "api/canteens",
       "environmentVariables": {
+        "SECRET_KEY": "hello_motherfucker",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
