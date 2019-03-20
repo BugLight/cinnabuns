@@ -1,15 +1,18 @@
 import Vue from 'vue';
 import Resource from 'vue-resource';
 import Vuex from 'vuex';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCreditCard, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCreditCard, faShoppingBasket, faTimes, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { polyfill } from 'es6-object-assign';
 
-library.add(faCreditCard, faShoppingBasket)
+polyfill();
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+library.add(faCreditCard, faShoppingBasket, faTimes, faEdit);
 
-Vue.config.productionTip = false
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+Vue.config.productionTip = false;
 
 import App from './components/App.vue';
 import router from './router';
@@ -25,10 +28,10 @@ const store = new Vuex.Store({
   },
   mutations: {
     setCanteens (state, canteens) {
-      state.canteens = canteens
+      state.canteens = canteens;
     },
     setActiveCanteen (state, canteen) {
-      state.activeCanteen = canteen
+      state.activeCanteen = canteen;
     },
     setAccessToken (state, token) {
       state.accessToken = token;
@@ -75,4 +78,4 @@ const app = new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
