@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h1 class="title-main">{{canteen ? canteen.name : null}}</h1>
+    <div class="router-link" @click="$router.push('/')">Вернуться к столовым</div><h1 class="title-main">{{canteen ? canteen.name : null}}</h1>
     <div class="container">
       <div class="filters">
         <h3 style="line-height: 0;">Фильтрация блюд</h3>

@@ -55,7 +55,6 @@ export default {
   bottom: 0;
   right: 30px;
   width: 300px;
-  background-color: #fff;
   @media (max-width: 900px) {
     right: 0px;
     width: 100%;
@@ -66,6 +65,7 @@ export default {
     border-top-left-radius: 20px;
     padding: 10px 20px;
     cursor: pointer;
+    background-color: #fff;
     @media (max-width: 900px) {
       border-top-right-radius: 20px;
       width: calc(100% - 40px);
@@ -76,6 +76,7 @@ export default {
     padding: 10px 20px;
     border-left: 1px solid black;
     animation: showBasket .1s ease-in-out;
+    background-color: #fff;
     .meals-container {
       padding-left: 20px;
       .reset-basket {
