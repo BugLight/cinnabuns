@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="meals-container">
-        <h3 style="line-height: 0; font-size: 25px;">Меню</h3>
+        <h3 class="h3-title-menu">Меню</h3>
         <div class="catedory-meals" v-for="content in menu" :key="content.id">
           <span class="title-category">{{content.category.name}}</span>
           <ul>

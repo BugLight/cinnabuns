@@ -1,5 +1,8 @@
 .title-main {
   margin-left: 100px;
+  @media (max-width: 900px) {
+    font-size: 40px;
+  }
 }
 .container {
   width: 100%;
@@ -7,6 +10,10 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  @media (max-width: 900px) {
+    flex-direction: column;
+    font-size: 30px;
+  }
   .filters {
     width: 20%;
     margin-left: 15px;
@@ -18,6 +25,9 @@
     flex-direction: column;
     justify-content: flex-start;
     background-color: rgba(235, 235, 235, 0.185);
+    @media (max-width: 900px) {
+      width: calc(100% - 15px - 40px - 15px);
+    }
     .item {
       margin: 10px 0;
       .category-selected {
@@ -25,6 +35,9 @@
           margin-top: 10px;
         }
         font-size: 19px;
+        @media (max-width: 900px) {
+          font-size: 25px;
+        }
         position: relative;
         padding-left: 25px;
         input[type=checkbox] {
@@ -60,9 +73,19 @@
     }
   }
   .meals-container {
-    width: calc(50% - 90px);
+    width: calc(60% - 90px);
     margin: 0 40px;
     padding: 5px 15px 15px;
+    @media (max-width: 900px) {
+      width: calc(100% - 180px);
+    }
+    .h3-title-menu {
+      line-height: 0;
+      font-size: 25px;
+      @media (max-width: 900px) {
+        font-size: 40px;
+      }
+    }
     .catedory-meals {
       .title-category {
         font-size: 20px;
@@ -78,8 +101,13 @@
           padding: 5px 15px;
           margin-bottom: 20px; 
           border-radius: 5px;
+          width: 100%;
           .meal-title {
             font-size: 19px;
+            word-wrap: break-word;
+            @media (max-width: 900px) {
+              font-size: 30px;
+            }
           }
           .meal-info { 
             padding-left: 20px;
@@ -93,6 +121,12 @@
             border: 1px solid black;
             border-radius: 5px;
             cursor: pointer;
+            @media (max-width: 900px) {
+              top: inherit;
+              bottom: 5px;
+              right: 5px;
+              font-size: 20px;
+            }
             &:hover {
               background-color: #c4c4c5
             }
@@ -105,4 +139,9 @@
 .ui-state-default, .ui-widget-content .ui-state-default {
   border-radius: 100%;
   outline: none;
+  @media (max-width: 900px) {
+    width: 50px;
+    height: 50px;
+    top: -.5em;
+  }
 }
