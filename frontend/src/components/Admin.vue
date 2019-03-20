@@ -3,6 +3,27 @@
     <div class="content" v-if="isAuthenticated">
       <h1>Панель администратора</h1>
       <button class="button-cancel" v-on:click="logout">Выйти</button>
+      <div>
+        <div v-for="(canteen, i) in canteens" :key="i">
+          <h2>{{canteen.name}}</h2>
+          <table>
+            <tr>
+              <th align="left">Название</th>
+              <th align="left">Категория</th>
+              <th align="left">Цена</th>
+              <th align="left">Вес</th>
+              <th align="left">Калорийность</th>
+            </tr>
+            <tr v-for="(meal, j) in canteen.meals" :key="i">
+              <td>{{meal.name}}</td>
+              <td>{{meal.mealCategory.name}}</td>
+              <td>{{meal.price}}</td>
+              <td>{{meal.weight}}</td>
+              <td>{{meal.calorie}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="content" v-else>
       <h1>Выполните вход</h1>
@@ -28,8 +49,12 @@ export default {
   data () {
     return {
       name: '',
-      password: ''
+      password: '',
+      canteens: []
     };
+  },
+  created() {
+    this.loadMeals();
   },
   methods: {
     login () {
@@ -49,6 +74,19 @@ export default {
     clearForm () {
       this.name = '';
       this.password = '';
+    },
+    loadMeals () {
+      this.$http.get(BACK_URL + '/api/canteens')
+        .then(response => response.json())
+        .then(canteens => {
+          return Promise.all(canteens.map(c => {
+            return this.$http.get(BACK_URL + '/api/canteens/' + c.id.toString() + '/meals')
+              .then(response => response.json())
+              .then(meals => {
+                c.meals = meals;
+              });
+          })).then(_ => console.log(this.canteens = canteens));
+        });
     }
   },
   computed: {
