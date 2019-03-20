@@ -6,9 +6,11 @@ import { faCreditCard, faShoppingBasket, faTimes, faEdit } from '@fortawesome/fr
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { polyfill } from 'es6-object-assign';
 
+
 polyfill();
 
 library.add(faCreditCard, faShoppingBasket, faTimes, faEdit);
+
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -19,6 +21,10 @@ import router from './router';
 
 Vue.use(Resource);
 Vue.use(Vuex);
+
+/**
+ * Vuex - global state storage
+ */
 
 const store = new Vuex.Store({
   state: {

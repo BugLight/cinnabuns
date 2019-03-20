@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -16,15 +17,15 @@ namespace backend.Controllers
         }
 
         // GET: api/canteens/5/meals
+        // Function for sorting meals
         [HttpGet("canteens/{canteenId}/meals")]
         public IEnumerable<Meal> GetCanteenMeals(int canteenId, [FromQuery] string categories,
                                                  [FromQuery] int? priceMin, [FromQuery] int? priceMax,
                                                  [FromQuery] int? calorieMin, [FromQuery] int? calorieMax)
         {
 
-            return (from m in context.Meals
-                    join c in context.MealCategories on m.MealCategoryId equals c.Id
-                    where c.CanteenId == canteenId &&
+            return (from m in context.Meals.Include(m => m.MealCategory)
+                    where m.MealCategory.CanteenId == canteenId &&
                           (string.IsNullOrEmpty(categories) || categories.Contains(m.MealCategoryId.ToString())) &&
                           (priceMin == null || priceMin <= m.Price) &&
                           (priceMax == null || priceMax >= m.Calorie) &&
@@ -33,15 +34,67 @@ namespace backend.Controllers
                     select m);
         }
 
-        // GET api/meals/3
+        // GET: api/meals/3
+        // Function for getting meal by id
         [HttpGet("meals/{id}")]
         public ActionResult<Meal> GetMeal(int id)
         {
-            var meal = context.Meals.Find(id);
+            var meal = context.Meals.Include(m => m.MealCategory).FirstOrDefault(m => m.Id == id);
             if (meal == null)
                 return NotFound();
 
             return meal;
+        }
+
+        // Function for adding meal to menu
+        [HttpPost("meals")]
+        public ActionResult<Meal> AddMeal([FromBody] Meal meal)
+        {
+            if (meal == null)
+                return BadRequest();
+
+            context.Meals.Add(meal);
+            context.SaveChanges();
+
+            return meal;
+        }
+
+        // Function for editng meal from menu
+        [HttpPut("meals")]
+        public ActionResult<Meal> EditMeal([FromBody] Meal newMeal)
+        {
+            if (newMeal == null)
+                return BadRequest();
+
+            var meal = context.Meals.Find(newMeal.Id);
+
+            if (meal == null)
+                return NotFound();
+
+            meal.Name = newMeal.Name;
+            meal.Price = newMeal.Price;
+            meal.Weight = newMeal.Weight;
+            meal.Calorie = newMeal.Calorie;
+            meal.MealCategory = newMeal.MealCategory;
+            meal.MealCategoryId = newMeal.MealCategoryId;
+            context.SaveChanges();
+
+            return meal;
+        }
+
+        // Function for deleting meal from menu
+        [HttpDelete("meals/{id}")]
+        public ActionResult DeleteMeal(int id)
+        {
+            var meal = context.Meals.Find(id);
+
+            if (meal == null)
+                return NotFound();
+
+            context.Meals.Remove(meal);
+            context.SaveChanges();
+
+            return Ok();
         }
     }
 }

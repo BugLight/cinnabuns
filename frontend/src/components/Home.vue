@@ -15,7 +15,13 @@
 <script>
 export default {
   created() {
+    /**
+     * get canteens for home page
+     */
     this.$http.get(this.backUrl+'/api/canteens').then(response => {
+      /**
+       * recorde in global storage
+       */
       this.$store.commit('setCanteens', response.body);
       this.canteens = this.$store.state.canteens;
     })
@@ -30,6 +36,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * route to canteen page and set active canteen
+     */
     linkToCanteen: function (canteen) {
       this.$store.commit('setActiveCanteen', canteen)
       this.$router.push({name: 'canteen', params: {id: canteen.id}})
@@ -55,6 +64,7 @@ export default {
     margin: 10px 0;
     padding: 0 30px;
     position: relative;
+    cursor: pointer;
     @media (max-width: 900px) {
       margin: 30px 0;
     }

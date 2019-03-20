@@ -7,14 +7,24 @@ import Admin from './components/Admin.vue';
 
 Vue.use(Router);
 
+/**
+ * routing library for Vue.js
+ */
+
 export default new Router({
   mode: 'history',
   routes: [
+    /**
+     * route for home page
+     */
     {
       path: '/',
       name: 'home',
       component: Home
     },
+    /**
+     * route for canteen page
+     */
     {
       path: '/canteen/:id',
       name: 'canteen',

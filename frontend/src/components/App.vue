@@ -5,6 +5,9 @@
   </div>
 </template>
 <script>
+/**
+ * Using header for application and using vue router
+ */
 import Header from './Header.vue';
 export default {
   components: {

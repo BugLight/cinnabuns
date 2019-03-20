@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h1 class="title-main">{{canteen ? canteen.name : null}}</h1>
+    <div class="router-link" @click="$router.push('/')">Вернуться к столовым</div><h1 class="title-main">{{canteen ? canteen.name : null}}</h1>
     <div class="container">
       <div class="filters">
         <h3 style="line-height: 0;">Фильтрация блюд</h3>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="meals-container">
-        <h3 style="line-height: 0; font-size: 25px;">Меню</h3>
+        <h3 class="h3-title-menu">Меню</h3>
         <div class="catedory-meals" v-for="content in menu" :key="content.id">
           <span class="title-category">{{content.category.name}}</span>
           <ul>
@@ -40,7 +40,7 @@
                 Калорийность: {{meal.calorie}} ккал.<br/>
                 Цена: {{meal.price}} р.
               </div>
-              <div class="add-to-basket" :id="`btn-add-basket-${meal.id}`" @click="addToBascket(meal, `#btn-add-basket-${meal.id}`)">Добавить в корзину</div>
+              <div class="add-to-basket" :id="`btn-add-basket-${meal.id}`" @click="addToBascket(meal, `#btn-add-basket-${meal.id}`)"><span v-if="meal.type == 'isBasket'">Убрать из корзины</span><span v-else>Добавить в корзину</span></div>
             </li>
           </ul>
         </div>

@@ -16,6 +16,9 @@
 </template>
 <script>
 export default {
+  /**
+   * props data for basket
+   */
   props: {
     meals: {
       type: Array,
@@ -24,6 +27,9 @@ export default {
   },
   watch: {
     meals: function() {
+      /**
+       * using function for calculate and recalculate basket
+       */
       this.calculateMeals()
     }
   },
@@ -55,17 +61,28 @@ export default {
   bottom: 0;
   right: 30px;
   width: 300px;
+  @media (max-width: 900px) {
+    right: 0px;
+    width: 100%;
+  }
   .basket-false {
     width: 100%;
     border: 1px solid black;
     border-top-left-radius: 20px;
     padding: 10px 20px;
+    cursor: pointer;
+    background-color: #fff;
+    @media (max-width: 900px) {
+      border-top-right-radius: 20px;
+      width: calc(100% - 40px);
+    }
   }
   .basket-show-panel {
     width: 100%;
     padding: 10px 20px;
     border-left: 1px solid black;
     animation: showBasket .1s ease-in-out;
+    background-color: #fff;
     .meals-container {
       padding-left: 20px;
       .reset-basket {
