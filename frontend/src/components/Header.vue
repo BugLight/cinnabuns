@@ -1,7 +1,5 @@
 <template>
-  <div class="header">
-
-  </div>
+  <div class="header"></div>
 </template>
 
 <style lang="scss" scoped>
