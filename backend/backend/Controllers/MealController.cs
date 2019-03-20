@@ -71,7 +71,6 @@ namespace backend.Controllers
             meal.Price = newMeal.Price;
             meal.Weight = newMeal.Weight;
             meal.Calorie = newMeal.Calorie;
-            meal.MealCategory = newMeal.MealCategory;
             meal.MealCategoryId = newMeal.MealCategoryId;
             context.SaveChanges();
 
