@@ -53,6 +53,7 @@ export default {
     margin: 10px 0;
     padding: 0 30px;
     position: relative;
+    cursor: pointer;
     @media (max-width: 900px) {
       margin: 30px 0;
     }

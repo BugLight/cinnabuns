@@ -93,6 +93,7 @@ export default {
         let _meals = []
         for (let meal of this.meals) {
           if (meal.mealCategoryId == category.id) {
+            meal.type = "noBasket"
             _meals.push(meal)
           }
         }
@@ -103,15 +104,32 @@ export default {
           })
         }
       }
+      if (this.basketMeals.length > 0) {
+        for (let item of this.menu) {
+          for (let meal of item.meals) {
+            for (let basketMeal of this.basketMeals) {
+              if (meal.id == basketMeal.id) {
+                meal.type = 'isBasket'
+              }
+            }
+          }
+        }
+      }
     },
-    addToBascket: function(meal, el) {
+    addToBascket: function(meal) {
       if (this.basketMeals.indexOf(meal) !== -1) {
-        $(el).html('Добавить в корзину')
+        meal.type = "noBasket"
         this.basketMeals.splice(this.basketMeals.indexOf(meal), 1)
       } else {
-        $(el).html('Убрать из корзины')
+        for (let basketMeal of this.basketMeals) {
+          if (basketMeal.id == meal.id) {
+            meal.type = "noBasket"
+            this.basketMeals.splice(this.basketMeals.indexOf(basketMeal), 1)
+            return null
+          }
+        }
+        meal.type = "isBasket"
         this.basketMeals.push(meal)
-
       }
     }
   },
