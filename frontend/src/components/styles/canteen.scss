@@ -1,8 +1,27 @@
 .title-main {
   margin-left: 100px;
+  margin-left: 15px;
   @media (max-width: 900px) {
     font-size: 40px;
+    text-align: center;
   }
+}
+.router-link {
+  width: 180px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 10px;
+  position: relative;
+  cursor: pointer;
+  &::before {
+    content: ''; 
+    position: absolute;
+    left: -6px; 
+    bottom: 11px;
+    border: 8px solid transparent;	
+    border-right: 10px solid black;
+  } 
 }
 .container {
   width: 100%;
