@@ -29,6 +29,8 @@
 
 Для установки зависимостей в папке frontend (так же для выполнения следующих команд нужно перейти в папку fronend) необходимо использовать комманду `npm install`
 
+Установить переменную окружения `BACK_URL=https://cinnabuns-chipper-chipmunk.eu-gb.mybluemix.net`
+
 * Затем использовать `npm run prod` или `npm run build` для сборки проекта в режиме production или development
 * Для запуска сервера необходимо использовать команду `npm run serve`
 
