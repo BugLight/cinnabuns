@@ -16,6 +16,9 @@
 </template>
 <script>
 export default {
+  /**
+   * props data for basket
+   */
   props: {
     meals: {
       type: Array,
@@ -24,6 +27,9 @@ export default {
   },
   watch: {
     meals: function() {
+      /**
+       * using function for calculate and recalculate basket
+       */
       this.calculateMeals()
     }
   },

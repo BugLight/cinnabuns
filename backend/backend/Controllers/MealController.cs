@@ -17,6 +17,7 @@ namespace backend.Controllers
         }
 
         // GET: api/canteens/5/meals
+        // Function for sorting meals
         [HttpGet("canteens/{canteenId}/meals")]
         public IEnumerable<Meal> GetCanteenMeals(int canteenId, [FromQuery] string categories,
                                                  [FromQuery] int? priceMin, [FromQuery] int? priceMax,
@@ -33,7 +34,8 @@ namespace backend.Controllers
                     select m);
         }
 
-        // GET api/meals/3
+        // GET: api/meals/3
+        // Function for getting meal by id
         [HttpGet("meals/{id}")]
         public ActionResult<Meal> GetMeal(int id)
         {
@@ -44,6 +46,7 @@ namespace backend.Controllers
             return meal;
         }
 
+        // Function for adding meal to menu
         [HttpPost("meals")]
         public ActionResult<Meal> AddMeal([FromBody] Meal meal)
         {
@@ -56,6 +59,7 @@ namespace backend.Controllers
             return meal;
         }
 
+        // Function for editng meal from menu
         [HttpPut("meals")]
         public ActionResult<Meal> EditMeal([FromBody] Meal newMeal)
         {
@@ -77,6 +81,7 @@ namespace backend.Controllers
             return meal;
         }
 
+        // Function for deleting meal from menu
         [HttpDelete("meals/{id}")]
         public ActionResult DeleteMeal(int id)
         {

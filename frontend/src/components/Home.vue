@@ -7,13 +7,21 @@
         <div class="c-card" title="Оплата картой" v-if="canteen.acceptCards"><font-awesome-icon icon="credit-card" size="lg" :style="{ color: 'black' }"/> Оплата картой</div>
       </div>
     </div>
+    <!-- Remove it -->
+    <router-link to="/admin">Admin</router-link>
   </div>
 </template>
 
 <script>
 export default {
   created() {
+    /**
+     * get canteens for home page
+     */
     this.$http.get(this.backUrl+'/api/canteens').then(response => {
+      /**
+       * recorde in global storage
+       */
       this.$store.commit('setCanteens', response.body);
       this.canteens = this.$store.state.canteens;
     })
@@ -28,6 +36,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * route to canteen page and set active canteen
+     */
     linkToCanteen: function (canteen) {
       this.$store.commit('setActiveCanteen', canteen)
       this.$router.push({name: 'canteen', params: {id: canteen.id}})

@@ -16,13 +16,15 @@ namespace backend.Controllers
         }
 
         // GET: api/canteens
+        // Functions for getting canteens
         [HttpGet]
         public IEnumerable<Canteen> GetCanteens()
         {
             return from c in context.Canteens select c;
         }
 
-        // GET api/canteens/5
+        // GET: api/canteens/5
+        // Functions for getting canteeen by id
         [HttpGet("{id}")]
         public ActionResult<object> Get(int id)
         {
