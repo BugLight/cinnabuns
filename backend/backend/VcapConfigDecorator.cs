@@ -26,7 +26,7 @@ namespace backend
                     var user = uri.UserInfo.Split(":")[0];
                     var password = uri.UserInfo.Split(":")[1];
                     var db = uri.LocalPath.TrimStart('/');
-                    this.configuration["ConnectionStrings:Default"] = $"Server={host};Port={port};Uid={user};Pwd={password};Database={db}";
+                    this.configuration["ConnectionStrings:Default"] = $"Server={host};Port={port};Uid={user};Pwd={password};Database={db};Charset=utf8;";
                 }
             }
         }
