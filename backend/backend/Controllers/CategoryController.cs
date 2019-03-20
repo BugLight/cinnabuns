@@ -14,6 +14,7 @@ namespace backend.Controllers
         private readonly AppContext context;
 
         // GET: api/canteens/5/categories
+        // Function for getting canteen's category of meals by canteen id
         [HttpGet("canteens/{canteenId}/categories")]
         public IEnumerable<MealCategory> GetCanteenCategories(int canteenId)
         {
@@ -22,7 +23,8 @@ namespace backend.Controllers
                     select m);
         }
 
-        // GET api/categories/3
+        // GET: api/categories/3
+        // Function for getting category of meals by category id
         [HttpGet("categories/{id}")]
         public ActionResult<MealCategory> GetCategory(int id)
         {
