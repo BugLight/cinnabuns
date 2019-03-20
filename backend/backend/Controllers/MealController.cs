@@ -43,5 +43,53 @@ namespace backend.Controllers
 
             return meal;
         }
+
+        [HttpPost("meals")]
+        public ActionResult<Meal> AddMeal([FromBody] Meal meal)
+        {
+            if (meal == null)
+                return BadRequest();
+
+            context.Meals.Add(meal);
+            context.SaveChanges();
+
+            return meal;
+        }
+
+        [HttpPut("meals")]
+        public ActionResult<Meal> EditMeal([FromBody] Meal newMeal)
+        {
+            if (newMeal == null)
+                return BadRequest();
+
+            var meal = context.Meals.Find(newMeal.Id);
+
+            if (meal == null)
+                return NotFound();
+
+            meal.Name = newMeal.Name;
+            meal.Price = newMeal.Price;
+            meal.Weight = newMeal.Weight;
+            meal.Calorie = newMeal.Calorie;
+            meal.MealCategory = newMeal.MealCategory;
+            meal.MealCategoryId = newMeal.MealCategoryId;
+            context.SaveChanges();
+
+            return meal;
+        }
+
+        [HttpDelete("meals/{id}")]
+        public ActionResult DeleteMeal(int id)
+        {
+            var meal = context.Meals.Find(id);
+
+            if (meal == null)
+                return NotFound();
+
+            context.Meals.Remove(meal);
+            context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
