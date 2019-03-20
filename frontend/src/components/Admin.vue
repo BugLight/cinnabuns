@@ -154,23 +154,24 @@ export default {
       this.showModal = false;
     },
     confirmModal () {
+      this.modalMealCopy.mealCategoryId = this.modalMealCopy.mealCategory.id;
+      let sendObject = Object.assign({}, this.modalMealCopy);
+      sendObject.mealCategory = null;
       if (this.modalMealCopy.hasOwnProperty('id')) {
-        this.$http.put(BACK_URL + '/api/meals', this.modalMealCopy)
+        this.$http.put(BACK_URL + '/api/meals', sendObject)
           .then(response => {
-            if (response == 200)
+            if (response.status == 200)
               Object.assign(this.modalMeal, this.modalMealCopy);
             else
               alert('Ошибка изменения.');
           })
           .catch(e => alert('Ошибка изменения.'));
       } else {
-        this.$http.post(BACK_URL + '/api/meals', this.modalMealCopy)
+        this.$http.post(BACK_URL + '/api/meals', sendObject)
           .then(response => {
-            if (response == 200)
-              this.modalCanteen.meals.push(response.body);
-            else
-              alert('Ошибка добавления.');
+            return response.json();
           })
+          .then(meal => this.modalCanteen.meals.push(meal))
           .catch(e => alert('Ошибка добавления.'));
       }
       this.closeModal();
@@ -192,7 +193,7 @@ export default {
     createMeal (canteen) {
       this.createModal(canteen, {
         name: '',
-        category: null,
+        mealCategory: null,
         price: 0,
         weight: 0,
         calorie: 0
