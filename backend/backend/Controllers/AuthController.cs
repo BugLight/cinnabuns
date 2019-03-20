@@ -12,7 +12,6 @@ using System.Linq;
 namespace backend.Controllers
 {
     [Route("api/auth")]
-    [ApiController]
     [AllowAnonymous]
     public class AuthController : ControllerBase
     {
@@ -34,6 +33,8 @@ namespace backend.Controllers
 
         private User Authenticate(AuthData data)
         {
+            if (string.IsNullOrEmpty(data.Name) || string.IsNullOrEmpty(data.Password))
+                return null;
             var sha256 = SHA256.Create();
             var hashed = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(data.Password)));
             var user = (from c in context.Credentials

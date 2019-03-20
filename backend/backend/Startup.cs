@@ -52,7 +52,12 @@ namespace backend
                 .ServiceProvider.GetService<AppContext>();
             context.Database.Migrate();
 
-            app.UseCors(options => options.AllowAnyOrigin());
+            app.UseCors(options => {
+                options.AllowAnyMethod()
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
